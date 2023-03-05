@@ -1,0 +1,21 @@
+<html>
+<div class="items">
+    <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+        <h1>RAVINA RESTAURANT LOGIN</h1>
+        <div class="name">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" [(ngModel)]="name">
+        </div>
+        <div class="pwd">
+            <label for="pwd">Password:</label>
+            <input type="password" name="pwd" id="pwd" [(ngModel)]="pwd">
+        </div>
+        <div class="sub">
+            <button>LOGIN</button>
+        </div>
+        
+        <!-- <div>{{name}}</div> -->
+    </form>
+</div>
+
+</html>
