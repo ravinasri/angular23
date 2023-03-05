@@ -27,6 +27,18 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 
+Nodejs, npm installed along with nodejs installation, angular CLI
+if needed nvm installation to switch node version
+____________________________
+
+if your computer behind proxy if you are working in company then follow the below command
+Note-if password is encoded please decode and use below command to make it work
+proxy=http://username:password@host:port
+http-proxy=http://username:password@host:port
+https_proxy=http://username:password@host:port
+registry=https://yourcompanyregistry.com
+____________________________
+
 npm -v => 6.14.17
 node -v=> 14.20.0
 ng -version=>10.0.8
