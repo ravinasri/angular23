@@ -1,26 +1,48 @@
-.name,
-.pwd {
+input{
+    width: 25%;
+    height: 5%;
+    padding: 20px 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
+
+div{
     display: flex;
     flex-direction: column;
-    width: 300px;
-    padding-bottom: 20px;
-    margin: 10px;
-   
+    border-radius: 5px;
+    padding: 20px;
 }
-button{
-    border-color: red;
-    width: 150px;
-    border-radius: 10px;
-    background-color: rgba(220, 133, 20, 0.841);
+
+button:disabled{
+    background-color: red;
     color: white;
     
 }
-label {
-    font-size: large;
-    font-family: fantasy;
+button{
+    background-color: darkblue;
+    color:white;
+    width: 30%;
+    height: 5%;
+    padding: 20px;
+    margin: 10px;
+    
+}
+.myclass{
+    color:red;
 }
 
-.items{
-  float: left;
+color{
+    color:yellow;
 }
 
+.success-class{
+    color: green;
+}
+
+.failure-class{
+    color:red;
+}
+
+.special-class{
+    font-style: italic;
+}
