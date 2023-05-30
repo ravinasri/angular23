@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, concat } from 'rxjs';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       catch (e) {
         subscribe.error(e)
       }
-    }).subscribe(a => console.log(a), e => console.log(e), () => console.log('completed..'))
+    }).pipe(filter(a => a != "Hi, I am Ravina7 calling...")).subscribe(a => console.log(a), e => console.log(e), () => console.log('completed..'))
   }
 
   //observable creation using new keyword - 2nd way
@@ -96,7 +97,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }).then(a => console.log(a)).catch(e => console.log(e))
 
-//Promise creation using new keyword with calling function example
+  //Promise creation using new keyword with calling function example
   pro3 = new Promise<string>(resolve => {
     resolve('Checking.....');
   }).then(a => console.log(this.calling()))
