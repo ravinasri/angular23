@@ -106,6 +106,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     return "Resolved yaarrr..,, calback func only called.."
   }
 
+  //promise creation using new keyword with calling functions and display in web page
+
+  pro4 = new Promise(function resolve(resolve, reject) {
+    resolve("Promise call back function calling.....>>>");
+    reject("Errror mannn..")
+  }).then(function value(value) {
+    console.log(value)
+    myDisplay(value)
+    return "value: " + value;
+  }, function err(e) {
+    console.log(e)
+    return "Error: " + e;
+  })
 
   //submit method for reactive form
   onSubmit() {
@@ -162,3 +175,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   // }
 
 }
+function myDisplay(value: any) {
+  document.getElementById("demo").innerText = value+" heeee :=)";
+}
+
