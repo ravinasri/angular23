@@ -1,39 +1,70 @@
 <div>
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
-        <label for="first-name">First Name: </label>
-        <input id="first-name" type="text" formControlName="firstName">
-      
-        <label for="last-name">Last Name: </label>
-        <input id="last-name" type="text" formControlName="lastName">
-      <button type="submit" [disabled]="!profileForm.valid">Submit</button>
-      {{profileForm.untouched}}
-      </form>
-    Favorite Color: <input  type="text" [formControl]="lgc">
-    <p>Value: {{ lgc.value }}</p>
-    <p>Form control prop</p>
-    <p>{{lgc.invalid}}</p>
-    <!-- /*status,pristine,dirty,touched,untouched,valid,invalid */ -->
-    <button (click)="updateName()">updateName</button>
-    <label for="fname">First Name</label>
-    <input type="text" name="fname" id="fname" [(ngModel)]="fname" value={{fname}} />
-    <p>FirstName :{{fname}}</p>
+  <h2>Form Control - Example Form</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="nick-name">Nick Name: </label>
+    <input id="nick-name" type="text" name="nick-name" [formControl]="nickName">
+    <div *ngIf="nickName.errors" style="color: red;">Please enter your nick name</div>
+    <button type="submit" [disabled]="!profileForm.valid">Submit -> Form1</button>
+  </form>
+  <hr>
 
+  <h2>Form Group - Example Form</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" name="first-name" formControlName="firstName">
+    <div *ngIf="profileForm.get('firstName').invalid" style="color: red;">First name is required</div>
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" name="last-name" formControlName="lastName">
+    <div *ngIf="profileForm.get('lastName').invalid" style="color: red;">Last name is required</div>
+    <label for="dob">DOB: </label>
+    <input id="dob" type="date" name="dob" formControlName="dob">
+    <div *ngIf="profileForm.get('dob').invalid" style="color: red;">DOB is required</div>
+    <button type="submit" [disabled]="!profileForm.valid">Submit -> Form2</button>
+  </form>
+  <ul>
+    <li>
+      {{"Validation Properties - untouched:"+profileForm.untouched}} </li>
+
+    <li>
+      {{"Validation Properties - touched:"+profileForm.touched}} </li>
+
+    <li>
+      {{"Validation Properties - dirty:"+profileForm.dirty}} </li>
+
+    <li>
+      {{"Validation Properties - pristine:"+profileForm.pristine}} </li>
+
+    <li>
+      {{"Validation Properties - valid:"+profileForm.valid}} </li>
+
+    <li>
+      {{"Validation Properties - invalid:"+profileForm.invalid}} </li>
+
+    <li>
+      {{"Validation Properties - status:"+profileForm.status}} </li>
+
+    <li>
+      Form Values: {{profileForm.value | json }}</li>
+  </ul>
+  <hr>
+  <h2>Form Builder - Example Form</h2>
+  <form [formGroup]="ContactForm" (ngSubmit)="onSubmit()">
+    <label for="lname">First Name</label>
+    <input type="text" name="fname" id="fname" formControlName="fname" />
     <label for="lname">Last Name</label>
-    <input [style.font-size]="colorFunction()" type="text" name="lname" id="lname" value={{lname}} />
-
+    <input [style.font-size]="colorFunction()" type="text" name="lname" formControlName="lname" id="lname" />
     <label for="dob">Date Of Birth</label>
-    <input [style.font-size]="colorFunction()" type="date" name="dob" id="dob" value={{dob}} />
-
+    <input [style.font-size]="colorFunction()" type="date" name="dob" formControlName="dob" id="dob" />
     <label for="country">Country</label>
-    <input type="text" name="country" id="country" value={{country.length}} />
-
+    <input type="text" name="country" id="country" formControlName="country" />
     <label for="phone">Phone</label>
-    <input type="text" name="phone" id="phone" [value]=phone />
-
-    <label for="event">Event</label>
+    <input type="text" name="phone" id="phone" formControlName="phone" />
+    <button type="submit" [disabled]="ContactForm.invalid">Submit -> Form3</button>
+    <!-- <label for="event">Event</label>
     <input type="text" id="fname" (keyup.Space)="myfunction($event)">
     <p [ngClass]="messageClass">{{text}}</p>
-    <p [ngStyle]="styleObject">Sample</p>
+    <p [ngStyle]="styleObject">Sample</p> -->
+  </form>
 
 </div>

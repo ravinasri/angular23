@@ -2,16 +2,20 @@ input{
     width: 25%;
     height: 5%;
     padding: 20px 20px;
-    margin: 10px;
     border: 1px solid #ccc;
+    display: block;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-div{
+/* div{
     display: flex;
     flex-direction: column;
     border-radius: 5px;
     padding: 20px;
-}
+    display: flex;
+    flex: auto;
+} */
 
 button:disabled{
     background-color: red;
@@ -24,8 +28,8 @@ button{
     width: 30%;
     height: 5%;
     padding: 20px;
-    margin: 10px;
-    
+   border-color: black;
+   border-radius: 5px;   
 }
 .myclass{
     color:red;
@@ -46,3 +50,5 @@ color{
 .special-class{
     font-style: italic;
 }
+
+
