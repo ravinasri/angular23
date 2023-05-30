@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription, concat } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,14 +10,15 @@ import { filter } from 'rxjs/operators';
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
-
+     
+  
   //field creation for observable disposable
   subscription: Subscription;
 
   count: number = 0;
 
   //inject form builder
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private router: Router, private route: ActivatedRoute) { }
 
   //lifecycle destroy method
   ngOnDestroy(): void {
@@ -24,6 +26,29 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   //lifecycle init method
   ngOnInit(): void {
+    this.router.navigate(['login'], { relativeTo: this.route });
+    //async - make promise and easier to write/makes a function return a Promise
+    async function myDisplay() {
+      return "Async!!!";
+    }
+    myDisplay().then(alert);
+
+    //explicit async return promise same as above
+    async function f() {
+      return Promise.resolve(10000);
+    }
+    f().then(alert); 
+
+    //await
+
+    async function fun() {
+      let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("Await done!"), 10000)
+      });  
+      let result = await promise; // wait until the promise resolves (*)  
+      alert(result); // "done!"
+    }  
+    fun();
 
     //observable creation using new keyword - 1st way
     this.subscription = new Observable(function subscriber(subscribe) {
@@ -85,17 +110,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   //promise creation using new keyword - 2nd way
   promise2 = new Promise(function resolve(resolve) {
     try {
-      resolve('Promise2  calling..');
-      resolve('Promise2  calling again..');
+      // resolve('Promise2  calling..');
+      // resolve('Promise2  calling again..');
       setTimeout(() => {
         resolve('Hi, promise 2 calling again with some delay');
       }, 2000)
-      resolve('Promise2 calling again hooo..');
+      // resolve('Promise2 calling again hooo..');
     }
     catch (e) {
       console.log(e)
     }
-  }).then(a => console.log(a)).catch(e => console.log(e))
+  }).then(a => console.log("check this pls:" + a)).catch(e => console.log(e))
 
   //Promise creation using new keyword with calling function example
   pro3 = new Promise<string>(resolve => {
@@ -109,16 +134,21 @@ export class LoginComponent implements OnInit, OnDestroy {
   //promise creation using new keyword with calling functions and display in web page
 
   pro4 = new Promise(function resolve(resolve, reject) {
+    // "Producing Code" (May take some time)
     resolve("Promise call back function calling.....>>>");
     reject("Errror mannn..")
-  }).then(function value(value) {
-    console.log(value)
-    myDisplay(value)
-    return "value: " + value;
-  }, function err(e) {
-    console.log(e)
-    return "Error: " + e;
   })
+    // "Consuming Code" (Must wait for a fulfilled Promise)-call back function
+    .then(function value(value) {
+      console.log(value)
+      myDisplay(value)
+      return "value: " + value;
+    }, function err(e) {
+      console.log(e)
+      return "Error: " + e;
+    })
+    .catch(e => console.log(e))
+    .finally(() => console.log("Finally executed successfully whether promise is success or not!"))
 
   //submit method for reactive form
   onSubmit() {
@@ -174,8 +204,37 @@ export class LoginComponent implements OnInit, OnDestroy {
   //   this.lgc.setValue("Thangavel");
   // }
 
+  //fetch api - return promise
+  proUrl = fetch('https://jsonplaceholder.typicode.com/todos/1')
+    // .then below runs when the remote server responds
+    .then(function (response) {
+      // response.text() returns a new promise that resolves with the full response text
+      // when it loads
+      return response.text();
+    })
+    .then(function (response) {
+      console.log(response)
+      // ...and here's the content of the remote file
+      alert(response); // {"name": "iliakan", "isAdmin": true}
+    })
+    .catch(err => alert(err));
+
+  //promise chaining
+  proChain = new Promise(resolve => {
+    resolve(2);
+  }).then(function result(value: number) {
+    alert(value);
+    return value * 2;
+  }).then(function result(value: number) {
+    alert(value);
+    return value * 2;
+  }).then(function result(value: number) {
+    alert(value);
+    return value * 2;
+  })
 }
+
 function myDisplay(value: any) {
-  document.getElementById("demo").innerText = value+" heeee :=)";
+  document.getElementById("demo").innerText = value + " heeee :=)";
 }
 

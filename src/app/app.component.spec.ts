@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { FormBuilder } from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,6 +12,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers:[
+        FormBuilder
+      ]
     }).compileComponents();
   }));
 
@@ -22,8 +26,8 @@ describe('AppComponent', () => {
 
   it(`should have as title 'angular23'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular23');
+    const app = fixture.nativeElement;
+    expect(app).toEqual('Angular Applcation');
   });
 
   it('should render title', () => {
