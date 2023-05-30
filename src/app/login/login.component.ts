@@ -1,7 +1,7 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { birds } from '../models/birds'; 
-import { FormControl,FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl,FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,22 +9,34 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 })
 
 export class LoginComponent  {
+
+  constructor(private fb : FormBuilder){}
+
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
+    window.alert("Form Submitted..")  
+    console.log(this.profileForm.value);
+    console.log(this.profileForm.status);
+    console.log(this.nickName.value)
+    console.log(this.ContactForm.value)
   }
   profileForm = new FormGroup({
-    firstName: new FormControl('',Validators.required),
-    lastName: new FormControl('',Validators.required),
+    firstName: new FormControl('RAVINA',Validators.required),
+    lastName: new FormControl('THANGAVEL',Validators.required),
+    dob: new FormControl('',Validators.required)
   });
+
+  nickName = new FormControl('',Validators.required);
   
-  lgc = new FormControl('',Validators.required);
-  fname: string = "Los";
-  lname: string = "Angelina";
-  country: string = "America";
-  phone: string = "654321065";
+ContactForm = this.fb.group({
+fname: 'LOS',
+lname: 'ANGELINA',
+dob: '1998-07-03',
+country: 'America',
+phone: '654321065'
+})
+  
   public isDisabled: boolean = true;
-  dob: string = "1998-07-03"
+  
   text: string = '';
   public applyClass: string = "failure-class";
   messageClass = {
@@ -45,7 +57,7 @@ export class LoginComponent  {
   colorFunction(){
     return "10px";
   }
-  updateName(){
-    this.lgc.setValue("Thangavel");
-  }
+  // updateName(){
+  //   this.lgc.setValue("Thangavel");
+  // }
   }
