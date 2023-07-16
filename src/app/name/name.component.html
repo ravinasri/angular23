@@ -1,0 +1,46 @@
+<h1>Child Component</h1>
+<button (click)="updateView()">Trigger Change Detection</button>
+<ul>
+  <li *ngFor="let item of data">{{ item }}</li>
+</ul>
+
+<!-- <h1>Chips</h1>
+
+  <mat-form-field>
+    <mat-label>Toppings</mat-label>
+    <mat-select [formControl]="toppings" multiple>
+  
+      <mat-select-trigger>
+        <mat-chip-list>
+          <mat-chip *ngFor="let topping of toppings.value"
+            [removable]="true" (removed)="onToppingRemoved(topping)">
+            {{ topping }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-select-trigger>
+  
+      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+  
+    </mat-select>
+  </mat-form-field> -->
+<h2>sample chips</h2>
+<mat-form-field>
+  <mat-label>Toppings</mat-label>
+  <mat-select [formControl]="toppings" multiple>
+    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-select-trigger>
+  <mat-chip-list>
+    <mat-chip color="primary" selected *ngFor="let topping of toppings.value" [removable]="true"
+      (removed)="onToppingRemoved(topping)">
+      {{ topping }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</mat-select-trigger>
+
+<br>
+<br>

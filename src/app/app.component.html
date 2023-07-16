@@ -1,11 +1,20 @@
 <h1>Angular Applcation</h1>
+{{name}}
+
+
+  
 <span>
     <ol>
-        <li><a routerLink="/">Home</a></li>
-
+        <li><a routerLink="">Home</a></li>
         <li><a routerLink="/login">About Us</a></li>
-
     </ol>
 </span>
+
+<div>
+    <h1>Parent Component</h1>
+    <input #vehicle type="text" placeholder="Please add vehicle names.." />
+    <button (click)="addVehicles(vehicle.value)">Add Vehicles</button>
+    <app-name [data]="vehicles"></app-name>
+</div>
 <!-- <app-login></app-login> -->
 <router-outlet></router-outlet>
